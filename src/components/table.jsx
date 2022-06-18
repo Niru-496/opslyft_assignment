@@ -7,9 +7,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { useDispatch, useSelector } from "react-redux";
-import { listData } from "../Redux/Actions/ProductAction";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const columns = [
 	{ id: "name", label: "Country Name", minWidth: 170 },
@@ -74,14 +73,12 @@ function createData(
 // ];
 
 export default function StickyHeadTable() {
-
 	const [BigData, setBigData] = useState([]);
 	const [page, setPage] = useState(0);
 	const [rows, setRows] = useState([]);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
-	function appendData(arr){
-
+	function appendData(arr) {
 		arr.map((e) => {
 			let obj = createData(
 				e.Country,
@@ -91,17 +88,8 @@ export default function StickyHeadTable() {
 				e.TotalConfirmed,
 				e.TotalDeaths
 			);
-
-			for(let x of rows){
-				if(rows[x]){
-					rows[x] = 1
-				}
-				else{
-					rows.push(obj)
-				}
-			}
-		})
-
+			return rows.push(obj);
+		});
 	}
 
 	const data = () => {
@@ -109,22 +97,15 @@ export default function StickyHeadTable() {
 			.get("https://api.covid19api.com/summary")
 			.then((result) => {
 				setBigData(result.data.Countries);
-
-
-				// console.log(BigData);
 			})
-
 			.catch((err) => {
 				console.error(err);
 			});
-
 	};
+	appendData(BigData);
 	useEffect(() => {
 		data();
-		appendData(BigData);
-
-	}, []);
-
+	},[]);
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -135,6 +116,13 @@ export default function StickyHeadTable() {
 		setPage(0);
 	};
 
+	function sorting(){
+		BigData.sort(function(a,b){
+			return b-a
+		})
+		console.log(BigData)
+		// appendData(BigData);
+	}
 	return (
 		<Paper sx={{ width: "100%", overflow: "hidden" }}>
 			<TableContainer sx={{ maxHeight: 440 }}>
@@ -143,11 +131,13 @@ export default function StickyHeadTable() {
 						<TableRow>
 							{columns.map((column) => (
 								<TableCell
-									key={column.id}
+									key={uuidv4()}
 									align={column.align}
 									style={{ minWidth: column.minWidth }}
 								>
-									{column.label}
+									<button onClick={() => {
+										sorting(column.label)
+									}}>{column.label}</button>
 								</TableCell>
 							))}
 						</TableRow>
@@ -164,13 +154,13 @@ export default function StickyHeadTable() {
 										hover
 										role="checkbox"
 										tabIndex={-1}
-										key={row.name}
+										key={uuidv4()}
 									>
 										{columns.map((column) => {
 											const value = row[column.id];
 											return (
 												<TableCell
-													key={row.code}
+													key={uuidv4()}
 													align={column.align}
 												>
 													{column.format &&
