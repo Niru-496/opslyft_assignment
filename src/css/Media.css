@@ -1,0 +1,101 @@
+@media (max-width: 991.98px) {
+  .display-none {
+    display: none !important;
+  }
+
+  .Login-Register a {
+    font-size: 10px;
+  }
+  .btn-group button {
+    font-size: 13px;
+  }
+  .badge {
+    top: -10px;
+    padding: 5px;
+    font-size: 7px;
+  }
+  .input-group {
+    height: 30px;
+  }
+
+  .author-card-avatar img {
+    margin-top: -20%;
+  }
+
+}
+@media (max-width: 768px) {
+  .pc-header {
+    display: none !important;
+  }
+  .mobile-header {
+    display: block;
+  }
+
+  .btn-group button {
+    font-size: 12px;
+  }
+  .mobile-header img {
+    width: 60px;
+  }
+  .input-group {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .subscribe-head .form-section input[type="email"] {
+    height: 45px;
+    width: 70%;
+  }
+  .subscribe-head .form-section input[type="submit"] {
+    height: 47px;
+    padding: 0 58px;
+  }
+  
+}
+@media (max-width: 575.98px) {
+  .subscribe-head .form-section input[type="email"] {
+    width: 100%;
+  }
+  .subscribe-head .form-section input[type="submit"] {
+    width: 100%;
+    padding: 0 0;
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+  .subscribe-head h2 {
+    font-size: 25px;
+  }
+  .subscribe-section {
+    padding: 70px 0 70px;
+  }
+  .card-name {
+    width: 8%;
+    margin: 0 7px;
+  }
+  .login-center {
+    padding: 20px 0;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .center h5 {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+  .center p {
+    font-size: 17px;
+  }
+}
+@media (max-width: 400px) {
+  .subscribe-head h2 {
+    font-size: 20px;
+  }
+
+  .single-image,
+  .single-image img {
+    height: 200px;
+  }
+}
